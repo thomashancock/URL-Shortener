@@ -29,7 +29,7 @@ func main() {
 	go http.ListenAndServe(":8080", mh)
 	log.Println("Listening on http://localhost:8080")
 
-	// Watch for interrupt signal
+	// Run until interrupt signal received
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, os.Interrupt)
 	<-sig

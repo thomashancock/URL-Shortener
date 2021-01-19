@@ -30,12 +30,12 @@ func MapHandler(redirects map[string]string, fallback http.Handler) http.Handler
 
 func ShortenHandler(redirects map[string]string) http.HandlerFunc {
 	// Declare a URL generator
-	urlGen := URLGenerator()
+	urlGenerator := URLGenerator()
 
 	// Handler function which adds the url to the redirects map
 	fn := func(rw http.ResponseWriter, r *http.Request) {
 		url := r.URL.Query()["url"][0]
-		shortURL := "/" + urlGen()
+		shortURL := "/" + urlGenerator()
 		redirects[shortURL] = url
 		fmt.Fprintln(rw, url, "can now be accessed on", shortURL)
 	}
