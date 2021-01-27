@@ -1,8 +1,10 @@
-package main
+package handlers
 
 import (
 	"net/http"
 	"fmt"
+
+	"../utils"
 )
 
 
@@ -30,7 +32,7 @@ func MapHandler(redirects map[string]string, fallback http.Handler) http.Handler
 
 func ShortenHandler(redirects map[string]string) http.HandlerFunc {
 	// Declare a URL generator
-	urlGenerator := URLGenerator()
+	urlGenerator := utils.URLGenerator()
 
 	// Handler function which adds the url to the redirects map
 	fn := func(rw http.ResponseWriter, r *http.Request) {

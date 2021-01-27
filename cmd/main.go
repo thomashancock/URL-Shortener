@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+
+	"../internal/handlers"
 )
 
 
@@ -13,17 +15,17 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Add handler for main page
-	mux.HandleFunc("/", FrontpageHandler)
+	mux.HandleFunc("/", handlers.FrontpageHandler)
 
 	// Create map to store URLs
 	redirects := make(map[string]string)
 
 	// Handler to generate and register shortened URLs
-	sh := ShortenHandler(redirects)
+	sh := handlers.ShortenHandler(redirects)
 	mux.HandleFunc("/shorten", sh)
 
 	// Handler to redirect URLs
-	mh := MapHandler(redirects, mux)
+	mh := handlers.MapHandler(redirects, mux)
 
 	// Run server
 	go http.ListenAndServe(":8080", mh)

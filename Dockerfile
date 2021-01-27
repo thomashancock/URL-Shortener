@@ -6,12 +6,10 @@ WORKDIR /app/url-shortener
 # Copy everything to the PWD inside the container
 COPY . .
 
-# Download all dependencies
-RUN go get -d -v ./...
-
-RUN go build -o ./out/url-shortener .
+# Build via make
+RUN make build
 
 EXPOSE 8080
 
 # Run the executable
-CMD ["./out/url-shortener"]
+CMD ["./dist/url-shortener"]
