@@ -1,4 +1,4 @@
-FROM golang:1.10
+FROM golang:1.14.6
 
 # Set the Current Working Directory inside the container
 WORKDIR /app/url-shortener
