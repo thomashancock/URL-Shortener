@@ -16,7 +16,7 @@ type database struct {
 }
 
 // Add adds an entry to the database (map)
-func (db *database) Add(path string, redirect string) (error) {
+func (db *database) Add(path string, redirect string) error {
 	if db.db[path] != "" {
 		return errors.New("Path already in database")
 	}

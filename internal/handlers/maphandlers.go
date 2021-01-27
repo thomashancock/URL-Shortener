@@ -6,7 +6,6 @@ import (
 	"../database"
 )
 
-
 func MapHandler(db database.Database, fallback http.Handler) http.HandlerFunc {
 	fn := func(rw http.ResponseWriter, r *http.Request) {
 		redirect, err := db.Get(r.URL.Path[1:])

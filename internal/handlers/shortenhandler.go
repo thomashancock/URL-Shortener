@@ -1,13 +1,12 @@
 package handlers
 
 import (
-	"net/http"
 	"fmt"
+	"net/http"
 
-	"../utils"
 	"../database"
+	"../utils"
 )
-
 
 func ShortenHandler(db database.Database) http.HandlerFunc {
 	// Declare a URL generator

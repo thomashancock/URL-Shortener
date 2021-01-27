@@ -6,10 +6,9 @@ import (
 	"os"
 	"os/signal"
 
-	"../internal/handlers"
 	"../internal/database"
+	"../internal/handlers"
 )
-
 
 func main() {
 	// Declare server
