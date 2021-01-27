@@ -5,10 +5,11 @@ import (
 	"fmt"
 
 	"../utils"
+	"../database"
 )
 
 
-func ShortenHandler(redirects map[string]string) http.HandlerFunc {
+func ShortenHandler(db database.Database) http.HandlerFunc {
 	// Declare a URL generator
 	urlGenerator := utils.URLGenerator()
 
@@ -16,7 +17,11 @@ func ShortenHandler(redirects map[string]string) http.HandlerFunc {
 	fn := func(rw http.ResponseWriter, r *http.Request) {
 		url := r.URL.Query()["url"][0]
 		shortURL := "/" + urlGenerator()
-		redirects[shortURL] = url
+		err := db.Add(shortURL, url)
+		if err != nil {
+			rw.Write([]byte(fmt.Sprintf("Unable to provide short URL for %s", url)))
+			return
+		}
 		rw.Write([]byte(fmt.Sprintf("%s can now be accessed on %s", url, shortURL)))
 	}
 

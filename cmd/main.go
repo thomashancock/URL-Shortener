@@ -7,6 +7,7 @@ import (
 	"os/signal"
 
 	"../internal/handlers"
+	"../internal/database"
 )
 
 
@@ -18,14 +19,14 @@ func main() {
 	mux.HandleFunc("/", handlers.FrontpageHandler)
 
 	// Create map to store URLs
-	redirects := make(map[string]string)
+	db := database.NewDatabase()
 
 	// Handler to generate and register shortened URLs
-	sh := handlers.ShortenHandler(redirects)
+	sh := handlers.ShortenHandler(db)
 	mux.HandleFunc("/shorten", sh)
 
 	// Handler to redirect URLs
-	mh := handlers.MapHandler(redirects, mux)
+	mh := handlers.MapHandler(db, mux)
 
 	// Run server
 	go http.ListenAndServe(":8080", mh)
