@@ -17,7 +17,7 @@ func ShortenHandler(redirects map[string]string) http.HandlerFunc {
 		url := r.URL.Query()["url"][0]
 		shortURL := "/" + urlGenerator()
 		redirects[shortURL] = url
-		fmt.Fprintln(rw, url, "can now be accessed on", shortURL)
+		rw.Write([]byte(fmt.Sprintf("%s can now be accessed on %s", url, shortURL)))
 	}
 
 	return http.HandlerFunc(fn)
