@@ -4,13 +4,12 @@ import (
 	"fmt"
 	"net/http"
 
+	"../core"
 	"../database"
 	"../utils"
-
-	log "github.com/sirupsen/logrus"
 )
 
-func ShortenHandler(db database.Database) http.HandlerFunc {
+func NewShortenHandler(log core.Logger, db database.Database) http.HandlerFunc {
 	// Declare a URL generator
 	urlGenerator := utils.NewURLGenerator()
 
@@ -23,15 +22,18 @@ func ShortenHandler(db database.Database) http.HandlerFunc {
 		shortURL, err := urlGenerator()
 		if err != nil {
 			rw.Write([]byte(fmt.Sprintf("Unable to provide short URL for %s\n", url)))
+			log.Errorf("Unable to provide short URL for %s\n", url)
 			return
 		}
 
 		err = db.Add(shortURL, url)
 		if err != nil {
 			rw.Write([]byte(fmt.Sprintf("Unable to provide short URL for %s\n", url)))
+			log.Errorf("Unable to provide short URL for %s\n", url)
 			return
 		}
 		rw.Write([]byte(fmt.Sprintf("%s can now be accessed on /%s\n", url, shortURL)))
+		log.Infof("%s can now be accessed on /%s\n", url, shortURL)
 	}
 
 	return http.HandlerFunc(fn)

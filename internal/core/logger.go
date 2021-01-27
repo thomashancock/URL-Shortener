@@ -1,9 +1,5 @@
 package core
 
-import (
-	"github.com/sirupsen/logrus"
-)
-
 type Logger interface {
 	Infoln(...interface{})
 	Infof(string, ...interface{})
