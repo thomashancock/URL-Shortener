@@ -1,4 +1,4 @@
-#Thomas' URL Shortener Microservice
+# Thomas' URL Shortener Microservice
 
 ## Quick Reference
 1. [Building the URL shortener](#Building)
