@@ -25,6 +25,7 @@ func main() {
 	// Create map to store URLs
 	db := database.NewDatabase(log)
 
+	// Create and register a router to direct HTTP requests
 	router := handlers.NewRouteHandler(log, db)
 	mux.HandleFunc("/", router)
 
