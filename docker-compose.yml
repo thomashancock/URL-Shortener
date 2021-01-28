@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  app:
+    image: url-shortener
+    ports:
+      - 8080:8080
+    volumes:
+      - shortener-db:/app/url-shortener/etc
+volumes:
+  shortener-db: {}

@@ -18,4 +18,4 @@ RUN make build
 EXPOSE 8080
 
 # Run the executable
-CMD ["./dist/url-shortener"]
+ENTRYPOINT ["./dist/url-shortener"]
