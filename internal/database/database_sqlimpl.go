@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	"../core"
 
@@ -52,11 +53,21 @@ func (d *database_sqlimpl) Get(path string) (string, error) {
 	return redirect, nil
 }
 
-// init Initialises the DB
+func fileExists(filename string) bool {
+	info, err := os.Stat(filename)
+	if os.IsNotExist(err) {
+		return false
+	}
+	return !info.IsDir()
+}
+
 func (d *database_sqlimpl) init() {
-	var err error
-	d.db, err = sql.Open("sqlite3", "./sqlite-database.db")
 	d.log.Infoln("Creating SQL DB")
+
+	if d.db == nil {
+		d.log.Fatalln("Tried to create database on nil pointer")
+	}
+
 	createTableSQL := `CREATE TABLE aliases (
 		"index" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
 		"shorturl" text,
@@ -70,9 +81,26 @@ func (d *database_sqlimpl) init() {
 	d.log.Infoln("Created SQL DB")
 }
 
+// init Initialises the DB
+func (d *database_sqlimpl) open() {
+	dbFile := "./sqlite-database.db"
+
+	// If file doesn't exist, defer database initalisation
+	if !fileExists(dbFile) {
+		defer d.init()
+	}
+
+	d.log.Infoln("Opening SQL DB")
+	var err error
+	d.db, err = sql.Open("sqlite3", dbFile)
+	if err != nil {
+		d.log.Fatalf("Error opening db: %v", err)
+	}
+}
+
 // NewDatabase creates a new database
 func NewSQLDatabase(log core.Logger) Database {
 	db := database_sqlimpl{log: log, db: nil}
-	db.init()
+	db.open()
 	return &db
 }
