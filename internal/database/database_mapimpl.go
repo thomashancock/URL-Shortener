@@ -30,6 +30,7 @@ func (db *database_mapimpl) Get(path string) (string, error) {
 	return redirect, nil
 }
 
+// NEntries returns the number of entries in the map
 func (db *database_mapimpl) NEntries() (int, error) {
 	return len(db.db), nil
 }

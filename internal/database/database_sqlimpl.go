@@ -7,7 +7,7 @@ import (
 
 	"../core"
 
-	_ "github.com/mattn/go-sqlite3" // Import go-sqlite3 library
+	_ "github.com/mattn/go-sqlite3"
 )
 
 // database_sqlimpl implements the Database interface using a map
@@ -53,6 +53,7 @@ func (d *database_sqlimpl) Get(path string) (string, error) {
 	return redirect, nil
 }
 
+// NEntries returns the number of entries in the database
 func (d *database_sqlimpl) NEntries() (int, error) {
 	d.log.Infoln("Counting entries in DB")
 
@@ -61,6 +62,7 @@ func (d *database_sqlimpl) NEntries() (int, error) {
 	return count, nil
 }
 
+// fileExists checks if a file exists on the system
 func fileExists(filename string) bool {
 	info, err := os.Stat(filename)
 	if os.IsNotExist(err) {
@@ -69,6 +71,7 @@ func fileExists(filename string) bool {
 	return !info.IsDir()
 }
 
+// init initialises the database
 func (d *database_sqlimpl) init() {
 	d.log.Infoln("Creating SQL DB")
 
@@ -89,7 +92,8 @@ func (d *database_sqlimpl) init() {
 	d.log.Infoln("Created SQL DB")
 }
 
-// init Initialises the DB
+// open opens the DB
+// if the file doesn't exist, it is created and initialised
 func (d *database_sqlimpl) open() {
 	dbFile := "./sqlite-database.db"
 
