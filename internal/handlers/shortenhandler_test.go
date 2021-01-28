@@ -15,8 +15,6 @@ func Test_ShortenHandler_EmptyDB(t *testing.T) {
 	testLog := &utils.TestLogger{}
 	testDB := utils.NewTestDatabase(testLog)
 
-	// testDB.Add("0", "TestEntry")
-
 	sh := NewShortenHandler(testLog, testDB)
 
 	req, err := http.NewRequest("GET", "/shorten?url=Test", nil)
