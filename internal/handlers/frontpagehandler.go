@@ -6,6 +6,7 @@ import (
 	"../core"
 )
 
+// NewFrontpageHandler creates a handler which displays usage instructions
 func NewFrontpageHandler(log core.Logger) http.HandlerFunc {
 	fn := func(rw http.ResponseWriter, r *http.Request) {
 		rw.Write([]byte("Thomas' URL Shortener!\n"))

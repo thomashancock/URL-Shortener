@@ -8,6 +8,7 @@ import (
 	"../database"
 )
 
+// NewShortenHandler creates a handler which redirects from a shortened URL
 func NewMapHandler(log core.Logger, db database.Database) http.HandlerFunc {
 	fn := func(rw http.ResponseWriter, r *http.Request) {
 		log.Infof("Attempting redirect on %s\n", r.URL.Path)

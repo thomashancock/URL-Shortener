@@ -7,7 +7,7 @@ import (
 	"../database"
 )
 
-// NewRouteHandler calls the correct handler based on the passed path
+// NewRouteHandler creates a handler which calls the another handler based on the passed path
 func NewRouteHandler(log core.Logger, db database.Database) http.HandlerFunc {
 
 	fh := NewFrontpageHandler(log)

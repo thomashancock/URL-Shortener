@@ -9,6 +9,8 @@ import (
 	"../utils"
 )
 
+// NewShortenHandler creates a handler which registers a shortened URL
+// shortened URL generation is handled by utils.urlgenerator
 func NewShortenHandler(log core.Logger, db database.Database) http.HandlerFunc {
 	// Declare a URL generator
 	urlGenerator := utils.NewURLGenerator()
