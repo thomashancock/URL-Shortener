@@ -1,10 +1,9 @@
-package utils
+package database
 
 import (
 	"errors"
 
 	"../core"
-	"../database"
 )
 
 // database_mapimpl implements the Database interface using a map
@@ -37,7 +36,7 @@ func (db *database_mapimpl) NEntries() (int, error) {
 }
 
 // NewDatabase creates a new database
-func NewTestDatabase(log core.Logger) database.Database {
+func NewTestDatabase(log core.Logger) Database {
 	return &database_mapimpl{
 		log: log,
 		db:  make(map[string]string),

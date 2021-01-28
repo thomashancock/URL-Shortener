@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"../utils"
+	"../database"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -13,7 +14,7 @@ import (
 // Test_MapHandler_EntryExists tests MapHandler when the entry is in the database
 func Test_MapHandler_EntryExists(t *testing.T) {
 	testLog := &utils.TestLogger{}
-	testDB := utils.NewTestDatabase(testLog)
+	testDB := database.NewTestDatabase(testLog)
 
 	testDB.Add("0", "TestEntry")
 
@@ -39,7 +40,7 @@ func Test_MapHandler_EntryExists(t *testing.T) {
 // Test_MapHandler_NoEntry tests MapHandler when their is no entry in the database
 func Test_MapHandler_NoEntry(t *testing.T) {
 	testLog := &utils.TestLogger{}
-	testDB := utils.NewTestDatabase(testLog)
+	testDB := database.NewTestDatabase(testLog)
 
 	mh := NewMapHandler(testLog, testDB)
 

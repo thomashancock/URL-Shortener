@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"../utils"
+	"../database"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -13,7 +14,7 @@ import (
 // Test_RouteHandler_Frontpage tests requests for /
 func Test_RouteHandler_Frontpage(t *testing.T) {
 	testLog := &utils.TestLogger{}
-	testDB := utils.NewTestDatabase(testLog)
+	testDB := database.NewTestDatabase(testLog)
 
 	router := NewRouteHandler(testLog, testDB)
 
@@ -34,7 +35,7 @@ func Test_RouteHandler_Frontpage(t *testing.T) {
 // Test_RouteHandler_Frontpage tests requests for /shorten
 func Test_RouteHandler_Shorten(t *testing.T) {
 	testLog := &utils.TestLogger{}
-	testDB := utils.NewTestDatabase(testLog)
+	testDB := database.NewTestDatabase(testLog)
 
 	router := NewRouteHandler(testLog, testDB)
 
@@ -58,7 +59,7 @@ func Test_RouteHandler_Shorten(t *testing.T) {
 // Test_RouteHandler_Other tests requests for other paths
 func Test_RouteHandler_Other(t *testing.T) {
 	testLog := &utils.TestLogger{}
-	testDB := utils.NewTestDatabase(testLog)
+	testDB := database.NewTestDatabase(testLog)
 
 	testDB.Add("0", "TestEntry")
 

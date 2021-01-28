@@ -6,6 +6,7 @@ import (
 	"testing"
 
 	"../utils"
+	"../database"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -13,7 +14,7 @@ import (
 // Test_ShortenHandler_EmptyDB tests ShortenHandler when the db is empty
 func Test_ShortenHandler_EmptyDB(t *testing.T) {
 	testLog := &utils.TestLogger{}
-	testDB := utils.NewTestDatabase(testLog)
+	testDB := database.NewTestDatabase(testLog)
 
 	sh := NewShortenHandler(testLog, testDB)
 
@@ -37,7 +38,7 @@ func Test_ShortenHandler_EmptyDB(t *testing.T) {
 // Test_ShortenHandler_EntryExists tests ShortenHandler when the db already has entries
 func Test_ShortenHandler_EntryExists(t *testing.T) {
 	testLog := &utils.TestLogger{}
-	testDB := utils.NewTestDatabase(testLog)
+	testDB := database.NewTestDatabase(testLog)
 
 	testDB.Add("0", "TestEntry")
 

@@ -47,7 +47,7 @@ func (d *database_sqlimpl) Get(path string) (string, error) {
 	err := row.Scan(&shorturl, &redirect)
 	if err != nil {
 		d.log.Infof("Unable to find entry for %s in db\n", path)
-		return "", fmt.Errorf("Unable to find entry for %s in db: %w", err)
+		return "", fmt.Errorf("Unable to find entry for %s in db: %w", path, err)
 	}
 
 	return redirect, nil
