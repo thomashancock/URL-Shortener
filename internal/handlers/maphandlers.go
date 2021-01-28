@@ -1,13 +1,14 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"../core"
 	"../database"
 )
 
-func NewMapHandler(log core.Logger, db database.Database, fallback http.Handler) http.HandlerFunc {
+func NewMapHandler(log core.Logger, db database.Database) http.HandlerFunc {
 	fn := func(rw http.ResponseWriter, r *http.Request) {
 		log.Infof("Attempting redirect on %s\n", r.URL.Path)
 		redirect, err := db.Get(r.URL.Path[1:])
@@ -17,8 +18,8 @@ func NewMapHandler(log core.Logger, db database.Database, fallback http.Handler)
 		}
 
 		// If no redirect, fall back to fallback
-		log.Errorf("Unable to find URL for %s\n", r.URL.Path)
-		fallback.ServeHTTP(rw, r)
+		log.Infof("Unable to find URL for %s\n", r.URL.Path)
+		rw.Write([]byte(fmt.Sprintf("No redirect registered for %s\n", r.URL.Path)))
 	}
 
 	return http.HandlerFunc(fn)

@@ -12,7 +12,7 @@ func NewRouteHandler(log core.Logger, db database.Database) http.HandlerFunc {
 
 	fh := NewFrontpageHandler(log)
 	sh := NewShortenHandler(log, db)
-	mh := NewMapHandler(log, db, fh)
+	mh := NewMapHandler(log, db)
 
 	router := func(rw http.ResponseWriter, r *http.Request) {
 		log.Infof("Routing HTTP request: %s\n", r.URL.Path)
