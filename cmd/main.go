@@ -22,22 +22,14 @@ func main() {
 	// Declare server
 	mux := http.NewServeMux()
 
-	// Add handler for main page
-	fh := handlers.NewFrontpageHandler(log)
-	mux.HandleFunc("/", fh)
-
 	// Create map to store URLs
 	db := database.NewDatabase(log)
 
-	// Handler to generate and register shortened URLs
-	sh := handlers.NewShortenHandler(log, db)
-	mux.HandleFunc("/shorten", sh)
-
-	// Handler to redirect URLs
-	mh := handlers.NewMapHandler(log, db, mux)
+	router := handlers.NewRouteHandler(log, db)
+	mux.HandleFunc("/", router)
 
 	// Run server
-	go http.ListenAndServe(":8080", mh)
+	go http.ListenAndServe(":8080", mux)
 	log.Infoln("Listening on http://localhost:8080")
 
 	// Run until interrupt signal received
