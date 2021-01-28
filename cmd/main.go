@@ -23,7 +23,8 @@ func main() {
 	mux := http.NewServeMux()
 
 	// Create map to store URLs
-	db := database.NewSQLDatabase(log)
+	dbFile := "./sqlite-database.db"
+	db := database.NewSQLDatabase(log, dbFile)
 
 	// Create and register a router to direct HTTP requests
 	router := handlers.NewRouteHandler(log, db)

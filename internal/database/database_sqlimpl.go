@@ -94,9 +94,7 @@ func (d *database_sqlimpl) init() {
 
 // open opens the DB
 // if the file doesn't exist, it is created and initialised
-func (d *database_sqlimpl) open() {
-	dbFile := "./sqlite-database.db"
-
+func (d *database_sqlimpl) open(dbFile string) {
 	// If file doesn't exist, defer database initalisation
 	if !fileExists(dbFile) {
 		defer d.init()
@@ -111,8 +109,8 @@ func (d *database_sqlimpl) open() {
 }
 
 // NewDatabase creates a new database
-func NewSQLDatabase(log core.Logger) Database {
+func NewSQLDatabase(log core.Logger, dbFile string) Database {
 	db := database_sqlimpl{log: log, db: nil}
-	db.open()
+	db.open(dbFile)
 	return &db
 }
