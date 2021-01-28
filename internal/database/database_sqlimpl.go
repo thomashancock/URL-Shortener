@@ -70,7 +70,7 @@ func (d *database_sqlimpl) init() {
 
 	createTableSQL := `CREATE TABLE aliases (
 		"index" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
-		"shorturl" text,
+		"shorturl" text UNIQUE,
 		"redirect" text
 	 	);`
 	statement, err := d.db.Prepare(createTableSQL) // Prepare SQL Statement
