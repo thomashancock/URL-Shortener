@@ -37,9 +37,7 @@ func (d *database_sqlimpl) Add(path string, redirect string) error {
 // Get retreives an entry to the database
 func (d *database_sqlimpl) Get(path string) (string, error) {
 	// Query DB
-	sqlStatement := fmt.Sprintf(`SELECT shorturl, redirect FROM aliases
-		WHERE shorturl = '%s'`, path)
-	row := d.db.QueryRow(sqlStatement)
+	row := d.db.QueryRow("SELECT shorturl, redirect FROM aliases WHERE shorturl=?", path)
 
 	// Get information from row
 	var shorturl string
