@@ -13,7 +13,11 @@ import (
 // shortened URL generation is handled by utils.urlgenerator
 func NewShortenHandler(log core.Logger, db database.Database) http.HandlerFunc {
 	// Declare a URL generator
-	urlGenerator := utils.NewURLGenerator()
+	nURLs, err := db.NEntries()
+	if err != nil {
+		log.Fatalf("Unable to get number of entries in db")
+	}
+	urlGenerator := utils.NewURLGenerator(log, nURLs)
 
 	// Handler function which adds the url to the redirects map
 	fn := func(rw http.ResponseWriter, r *http.Request) {
@@ -21,7 +25,7 @@ func NewShortenHandler(log core.Logger, db database.Database) http.HandlerFunc {
 
 		log.Infof("Attempting shortening for %s\n", url)
 
-		shortURL, err := urlGenerator()
+		shortURL, err := urlGenerator.Get()
 		if err != nil {
 			rw.Write([]byte(fmt.Sprintf("Unable to provide short URL for %s\n", url)))
 			log.Errorf("Unable to provide short URL for %s\n", url)

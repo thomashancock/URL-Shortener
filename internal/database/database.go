@@ -4,4 +4,5 @@ package database
 type Database interface {
 	Add(string, string) error
 	Get(string) (string, error)
+	NEntries() (int, error)
 }

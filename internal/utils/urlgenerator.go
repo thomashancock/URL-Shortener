@@ -2,21 +2,35 @@ package utils
 
 import (
 	"strconv"
+
+	"../core"
 )
 
-// NewURLGenerator returns a function for generating URLs
-// Only expose NewURLGenerator() so internal logic can be easily changed
-func NewURLGenerator() func() (string, error) {
-	// URL generation logic can be changed here
-	return intIncr()
+// URLGenerator defined an interface for generating unique URLs
+type URLGenerator interface {
+	Get() (string, error)
 }
 
-// Each new URL is just the next integer
-func intIncr() func() (string, error) {
-	count := -1
-	fn := func() (string, error) {
-		count += 1
-		return strconv.Itoa(count), nil
+// genIntIncr implements the URLGenerator interface
+type genIntIncr struct {
+	log core.Logger
+	count *int
+}
+
+// Get returns a new URL
+// each generated URL should be unique
+func (g genIntIncr) Get() (string, error) {
+	url := strconv.Itoa(*g.count)
+	g.log.Infof("Generated new short URL: %s\n", url)
+	*g.count += 1
+	return url, nil
+}
+
+// NewURLGenerator returns a struct which matches the URLGenerator interface
+func NewURLGenerator(log core.Logger, start int) URLGenerator {
+	count := start
+	return &genIntIncr{
+		log: log,
+		count: &count,
 	}
-	return fn
 }

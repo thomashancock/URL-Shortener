@@ -53,6 +53,14 @@ func (d *database_sqlimpl) Get(path string) (string, error) {
 	return redirect, nil
 }
 
+func (d *database_sqlimpl) NEntries() (int, error) {
+	d.log.Infoln("Counting entries in DB")
+
+	var count int
+	_ = d.db.QueryRow("SELECT COUNT(*) FROM aliases").Scan(&count)
+	return count, nil
+}
+
 func fileExists(filename string) bool {
 	info, err := os.Stat(filename)
 	if os.IsNotExist(err) {

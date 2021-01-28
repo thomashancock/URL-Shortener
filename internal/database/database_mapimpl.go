@@ -30,6 +30,10 @@ func (db *database_mapimpl) Get(path string) (string, error) {
 	return redirect, nil
 }
 
+func (db *database_mapimpl) NEntries() (int, error) {
+	return len(db.db), nil
+}
+
 // NewDatabase creates a new database
 func NewDatabase(log core.Logger) Database {
 	return &database_mapimpl{
