@@ -4,7 +4,7 @@ import (
 	"testing"
 	"os"
 
-	"../utils"
+	"github.com/thomashancock/URL-Shortener/internal/utils"
 
 	"github.com/stretchr/testify/assert"
 )

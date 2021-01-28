@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"../core"
+	"github.com/thomashancock/URL-Shortener/internal/core"
 
 	_ "github.com/mattn/go-sqlite3"
 )

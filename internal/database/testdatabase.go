@@ -3,7 +3,7 @@ package database
 import (
 	"errors"
 
-	"../core"
+	"github.com/thomashancock/URL-Shortener/internal/core"
 )
 
 // database_mapimpl implements the Database interface using a map

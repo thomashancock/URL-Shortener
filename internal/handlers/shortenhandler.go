@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"../core"
-	"../database"
-	"../utils"
+	"github.com/thomashancock/URL-Shortener/internal/core"
+	"github.com/thomashancock/URL-Shortener/internal/database"
+	"github.com/thomashancock/URL-Shortener/internal/utils"
 )
 
 // NewShortenHandler creates a handler which registers a shortened URL

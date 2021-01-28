@@ -3,7 +3,7 @@ package utils
 import (
 	"strconv"
 
-	"../core"
+	"github.com/thomashancock/URL-Shortener/internal/core"
 )
 
 // URLGenerator defined an interface for generating unique URLs

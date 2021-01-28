@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"../core"
-	"../database"
+	"github.com/thomashancock/URL-Shortener/internal/core"
+	"github.com/thomashancock/URL-Shortener/internal/database"
 )
 
 // NewShortenHandler creates a handler which redirects from a shortened URL

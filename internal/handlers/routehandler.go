@@ -3,8 +3,8 @@ package handlers
 import (
 	"net/http"
 
-	"../core"
-	"../database"
+	"github.com/thomashancock/URL-Shortener/internal/core"
+	"github.com/thomashancock/URL-Shortener/internal/database"
 )
 
 // NewRouteHandler creates a handler which calls the another handler based on the passed path

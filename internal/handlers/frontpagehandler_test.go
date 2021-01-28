@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"../utils"
+	"github.com/thomashancock/URL-Shortener/internal/utils"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -5,8 +5,8 @@ import (
 	"os"
 	"os/signal"
 
-	"../internal/database"
-	"../internal/handlers"
+	"github.com/thomashancock/URL-Shortener/internal/database"
+	"github.com/thomashancock/URL-Shortener/internal/handlers"
 
 	"github.com/sirupsen/logrus"
 )

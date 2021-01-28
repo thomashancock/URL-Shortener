@@ -3,7 +3,7 @@ package handlers
 import (
 	"net/http"
 
-	"../core"
+	"github.com/thomashancock/URL-Shortener/internal/core"
 )
 
 // NewFrontpageHandler creates a handler which displays usage instructions
